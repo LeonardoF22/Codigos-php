@@ -7,10 +7,4 @@ for($i = 0; $i <= 2; $i++){
     }
 }
 
-//echo $nomes[0];
-//echo "\n";
-//echo $nomes[2];
-
-
-
 ?>
