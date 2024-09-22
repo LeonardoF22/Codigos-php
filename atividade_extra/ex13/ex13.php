@@ -10,23 +10,28 @@
     <form method="POST" action="ex13.php">
         <label>Digite um numero:</label>
         <input type="number" name="num"><br><br>
-        <input type="submit" value="" name="enviar">
+        <input type="submit" value="Chutar" name="enviar">
     </form>
     
     <?php
-        $aleatorio = random_int(1,100);
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['enviar'])){
+    //Cria uma sessão para guardar o numero aleatorio
+        session_start();
+        if (!isset($_SESSION['numero'])){
+            $_SESSION['numero'] = random_int(1,100);
+        }
+        //Verificando se o botão foi clicado
+        if (isset($_POST['enviar'])){
             $num = $_POST['num'];
-            echo $aleatorio;
-            if($num == $aleatorio){
+            if($num == $_SESSION['numero']){
+                //Caso o usuario acerte o numero a sessão é encerrada e outro numero aleatório é selecionado
                 echo "<h4>Parabéns você acertou!</h4>";
-            } else if($num > $aleatorio){
+                session_destroy();
+            } else if($num > $_SESSION['numero']){
                 echo "<h4>O número aleatório é menor que o palpite!</h4>";
             } else {
                 echo "<h4>O número aleatório é maior que o palpite!</h4>";
             }
         }
-
     ?>
 </body>
 </html>
